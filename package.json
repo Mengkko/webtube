@@ -1,0 +1,21 @@
+{
+  "name": "webtube",
+  "version": "1.0.0",
+  "description": "Clonning Youtube with Vanilla and NodeJs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Mengkko@github.com/Mengkko/webtube.git"
+  },
+  "author": "Mengkko",
+  "bugs": {
+    "url": "https://github.com/Mengkko/webtube/issues"
+  },
+  "homepage": "https://github.com/Mengkko/webtube#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
