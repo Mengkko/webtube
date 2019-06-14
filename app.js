@@ -10,6 +10,9 @@ import routes       from './routes.js'
 
 const app = express()
 
+app.set('view engine', 'pug')
+// view_engine이 기본으로는 undifined 이지만 pug를 기본 view_engine으로 추가한다.
+
 // ----------------------------- middleware 호출 시작
 app.use(cookieParser())
 app.use(bodyParser())
