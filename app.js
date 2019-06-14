@@ -3,12 +3,8 @@ import morgan from "morgan"
 import helmet from "helmet"
 import bodyParser from "body-parser"
 import cookieParser from "cookie-parser"
+import { userRouter } from './router'
 const app = express()
-
-const PORT = 4000
-
-const handleListening = () => 
-    console.log(`Listening on: http://localhost:${4000}`)
 
 const handleHome = (req, res) => res.send("Hi from my ass!!")
 
@@ -57,8 +53,9 @@ app.get("/", handleHome)
 // 실행 위치에 따라 미들에웨를 조절할수있다 
 // 현재는 /profile로 접속했을때만 사용 
 // 루트경로 /로 접속할때는 미들웨어 사용이 안됨
+app.get('/profile', handleProfile)
 
-app.get("/profile", handleProfile)
+app.use("/user", userRouter)
 // ----------------------------- route 종료
 
-app.listen(PORT,handleListening)
+export default app
