@@ -17,6 +17,7 @@ app.set('view engine', 'pug')
 // ----------------------------- middleware 호출 시작
 app.use(helmet())
 app.use(cookieParser())
+app.use("/uploads", express.static('uploads'))
 app.use(bodyParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
