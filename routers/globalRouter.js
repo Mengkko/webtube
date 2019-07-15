@@ -3,10 +3,10 @@ import routes from "../routes";
 import { home, search } from "../controllers/videoController";
 import {
   getJoin,
-  postJoin,
   getLogin,
-  postLogin,
-  logout
+  logout,
+  postJoin,
+  postLogin
 } from "../controllers/userController";
 
 const globalRouter = express.Router();
@@ -18,7 +18,7 @@ globalRouter.get(routes.login, getLogin);
 globalRouter.post(routes.login, postLogin);
 
 globalRouter.get(routes.home, home);
-globalRouter.get(routes.logout, logout);
 globalRouter.get(routes.search, search);
+globalRouter.get(routes.logout, logout);
 
 export default globalRouter;
