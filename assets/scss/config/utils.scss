@@ -1,0 +1,12 @@
+.u-avatar {
+  height: 80px;
+  background-color: $red;
+  border-radius: 50%;
+}
+.user-profile__header {
+  .u-avatar {
+    height: 250px;
+    background-color: $red;
+    border-radius: 50%;
+  }
+}
