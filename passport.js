@@ -1,10 +1,9 @@
 import passport from "passport";
 import GithubStrategy from "passport-github";
-import FacebookStrategy from "passport-facebook";
 import User from "./models/User";
 import {
-  githubLoginCallback,
-  facebookLoginCallback
+  githubLoginCallback
+  // ,facebookLoginCallback
 } from "./controllers/userController";
 import routes from "./routes";
 
@@ -20,16 +19,16 @@ passport.use(
     githubLoginCallback
   )
 );
-passport.use(
-  new FacebookStrategy(
-    {
-      clientID: process.env.FB_ID,
-      clientSecret: process.env.FB_SECRET,
-      callbackURL: `https://sharp-squid-62.localtunnel.me/${routes.facebookCallback}`
-    },
-    facebookLoginCallback
-  )
-);
+// passport.use(
+//   new FacebookStrategy(
+//     {
+//       clientID: process.env.FB_ID,
+//       clientSecret: process.env.FB_SECRET,
+//       callbackURL: `https://sharp-squid-62.localtunnel.me/${routes.facebookCallback}`
+//     },
+//     facebookLoginCallback
+//   )
+// );
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
