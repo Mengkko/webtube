@@ -2,6 +2,8 @@
 
 Clonning Youtube with Vanilla and NodeJs
 
+WebPack, babel, scss, pug
+
 ## Pages:
 
 
