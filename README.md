@@ -17,3 +17,4 @@ WebPack, babel, scss, pug
 - [x] Upload
 - [x] Video Detail
 - [x] Edit Video
+- [ ] Deploy
