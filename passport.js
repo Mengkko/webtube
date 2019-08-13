@@ -19,16 +19,6 @@ passport.use(
     githubLoginCallback
   )
 );
-// passport.use(
-//   new FacebookStrategy(
-//     {
-//       clientID: process.env.FB_ID,
-//       clientSecret: process.env.FB_SECRET,
-//       callbackURL: `https://sharp-squid-62.localtunnel.me/${routes.facebookCallback}`
-//     },
-//     facebookLoginCallback
-//   )
-// );
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
