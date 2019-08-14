@@ -2,7 +2,10 @@
 
 Clonning Youtube with Vanilla and NodeJs
 
+WebPack, babel, scss, pug
+
 ## Pages:
+
 
 - [x] Home
 - [x] Join
@@ -14,3 +17,6 @@ Clonning Youtube with Vanilla and NodeJs
 - [x] Upload
 - [x] Video Detail
 - [x] Edit Video
+- [ ] Deploy (heroku)
+- [ ] Deploy (aws)
+
