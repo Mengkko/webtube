@@ -1,34 +1,37 @@
 const videoContainer = document.getElementById("jsVideoPlayer");
-const videoPlyer = document.querySelector("#jsVideoPlayer video");
-const playButton = document.getElementById("jsPlayButton");
-const VolumeButton = document.getElementById("jsVolumeButton");
-const fullscrnButton = document.getElementById("jsFullScreen");
+const videoPlayer = document.querySelector("#jsVideoPlayer video");
+const playBtn = document.getElementById("jsPlayButton");
+const volumeBtn = document.getElementById("jsVolumeBtn");
+const fullScrnBtn = document.getElementById("jsFullScreen");
 const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
+const volumeRange = document.getElementById("jsVolume");
 
 function handlePlayClick() {
-  if (videoPlyer.paused) {
-    videoPlyer.play();
-    playButton.innerHTML = '<i class="fas fa-pause"></i>';
+  if (videoPlayer.paused) {
+    videoPlayer.play();
+    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
   } else {
-    videoPlyer.pause();
-    playButton.innerHTML = '<i class="fas fa-play"></i>';
+    videoPlayer.pause();
+    playBtn.innerHTML = '<i class="fas fa-play"></i>';
   }
 }
 
 function handleVolumeClick() {
-  if (videoPlyer.muted) {
-    videoPlyer.muted = false;
-    VolumeButton.innerHTML = '<i class="fas fa-volume-up"></i>';
+  if (videoPlayer.muted) {
+    videoPlayer.muted = false;
+    volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+    volumeRange.value = videoPlayer.volume;
   } else {
-    videoPlyer.muted = true;
-    VolumeButton.innerHTML = '<i class="fas fa-volume-mute"></i>';
+    volumeRange.value = 0;
+    videoPlayer.muted = true;
+    volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
   }
 }
 
 function exitFullScreen() {
-  fullscrnButton.innerHTML = '<i class="fas fa-expand"></i>';
-  fullscrnButton.addEventListener("click", goFullScreen);
+  fullScrnBtn.innerHTML = '<i class="fas fa-expand"></i>';
+  fullScrnBtn.addEventListener("click", goFullScreen);
   if (document.exitFullscreen) {
     document.exitFullscreen();
   } else if (document.mozCancelFullScreen) {
@@ -50,9 +53,9 @@ function goFullScreen() {
   } else if (videoContainer.msRequestFullscreen) {
     videoContainer.msRequestFullscreen();
   }
-  fullscrnButton.innerHTML = '<i class="fas fa-compress"></i>';
-  fullscrnButton.removeEventListener("click", goFullScreen);
-  fullscrnButton.addEventListener("click", exitFullScreen);
+  fullScrnBtn.innerHTML = '<i class="fas fa-compress"></i>';
+  fullScrnBtn.removeEventListener("click", goFullScreen);
+  fullScrnBtn.addEventListener("click", exitFullScreen);
 }
 
 const formatDate = seconds => {
@@ -74,27 +77,42 @@ const formatDate = seconds => {
 };
 
 function getCurrentTime() {
-  currentTime.innerHTML = formatDate(Math.floor(videoPlyer.currentTime));
+  currentTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime));
 }
 
 function setTotalTime() {
-  const totalTimeString = formatDate(videoPlyer.duration);
+  const totalTimeString = formatDate(videoPlayer.duration);
   totalTime.innerHTML = totalTimeString;
   setInterval(getCurrentTime, 1000);
 }
 
 function handleEnded() {
-  videoPlyer.currentTime = 0;
-  playButton.innerHTML = '<i class="fas fa-play"></i>';
+  videoPlayer.currentTime = 0;
+  playBtn.innerHTML = '<i class="fas fa-play"></i>';
+}
+
+function handleDrag(event) {
+  const {
+    target: { value }
+  } = event;
+  videoPlayer.volume = value;
+  if (value >= 0.6) {
+    volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+  } else if (value >= 0.2) {
+    volumeBtn.innerHTML = '<i class="fas fa-volume-down"></i>';
+  } else {
+    volumeBtn.innerHTML = '<i class="fas fa-volume-off"></i>';
+  }
 }
 
 function init() {
-  videoPlyer.currentTime = 590;
-  playButton.addEventListener("click", handlePlayClick);
-  VolumeButton.addEventListener("click", handleVolumeClick);
-  fullscrnButton.addEventListener("click", goFullScreen);
-  videoPlyer.addEventListener("loadedmetadata", setTotalTime);
-  videoPlyer.addEventListener("ended", handleEnded);
+  videoPlayer.volume = 0.5;
+  playBtn.addEventListener("click", handlePlayClick);
+  volumeBtn.addEventListener("click", handleVolumeClick);
+  fullScrnBtn.addEventListener("click", goFullScreen);
+  videoPlayer.addEventListener("loadedmetadata", setTotalTime);
+  videoPlayer.addEventListener("ended", handleEnded);
+  volumeRange.addEventListener("input", handleDrag);
 }
 
 if (videoContainer) {
